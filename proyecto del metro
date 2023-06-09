@@ -1,0 +1,423 @@
+program BoletosMetroCaracas;
+uses crt;
+var
+	boleto, nombre, apellido, tipo, estacionSalida, estacionDestino: string;
+	cedula, contrasena, confirmacion, cantidad, precio, monto, vuelto, linea, cantidadBoletos, totalCompra, encontrado, totalPersonas, totalBoletos: integer;
+	numero, i, totalVentas, promedioVentas: real;
+	opcion: char;
+const
+  Precio1 = (1.5);
+  Precio2 = (2.0);
+  Precio3 = (3.0);
+  Precio4 = (4.0);
+  Precio5 = (5.0);
+  Precio6 = (6.0);
+  Precio7 = (7.0);
+  Precio8 = (8.0);
+  Precio9 = (9.0);
+  Precio10 = (10.0);
+  
+  Linea1 = ('L1');
+  Linea2 = ('L2');
+  Linea3 = ('L3');
+  Linea4 = ('L4');
+  Linea5 = ('L5');
+  Linea6 = ('L6');
+  Linea7 = ('L7');
+  Linea8 = ('CLABETREN');
+
+  MaxBoletos = (100);
+  
+//Mostramos las estaciones disponibles segun su línea
+
+begin
+  writeln('Bienvenido al metro de Caracas');
+  writeln('Las estaciones disponibles son:');
+  
+  writeln('- Propatria');
+  writeln('- Capitolio');
+  writeln('- Plaza Venezuela');
+  writeln('- Miranda');
+  writeln('- Perez Bonalde');
+  writeln('- La Hoyada');
+  writeln('- Sabana Grande');
+  writeln('- Los dos caminos');
+  writeln('-Plaza Sucre');
+  writeln('- Parque Carabobo');
+  writeln('- Chacaito');
+  writeln('- Los cortijos');
+  writeln('- Gato Negro');
+  writeln('- Bellas Artes');
+  writeln('- Chacao');
+  writeln('- La California');
+  writeln('- Agua Salud');
+  writeln('- Colegio de Ing');
+  writeln('- Altamira');
+  writeln('- Petare');
+  writeln('- Caño amarillo');
+  writeln('- Palo Verde');
+        
+  writeln('- El Silencio');
+  writeln('- La paz');
+  writeln('- Mamera');
+  writeln('- Capuchinos');
+  writeln('- La Yaguara');
+  writeln('- Caricuao');
+  writeln('- Maternidad');
+  writeln('- Carapita');
+  writeln('- zoologico');
+  writeln('- Artiguas');
+  writeln('- Antimano');
+  writeln('- Ruiz Pineda/Las Adjuntas');
+  
+  writeln('- Plaza Venzuela');
+  writeln('- La Bandera');
+  writeln('- Coche');
+  writeln('- Ciudad Universitaria');
+  writeln('- El Valle');
+  writeln('- Mercado');
+  writeln('- Los Simbolos');
+  writeln('- Los Jardines');
+  writeln('- La Rinconada');
+  
+  writeln('- Zona Rental');
+  writeln('- Maternidad');
+  writeln('- Antimano');
+  writeln('- Parque Central');
+  writeln('- Artigas');
+  writeln('- Mamera');
+  writeln('- Nuevo circo');
+  writeln('- La Paz');
+  writeln('- Ruiz Pineda/Las Adjuntas');
+  writeln('- Teatros');
+  writeln('- La Yaragua');
+  writeln('- Capuchinos');
+  writeln('- Carapita');	      
+	
+  writeln('- Bello Monte');
+  writeln('- Bello Campo');
+  writeln('- Boleita');
+  writeln('- Las Mercedes');
+  writeln('- Hugo Chavez');
+  writeln('- El Marquez');
+  writeln('- Parque Simon Bolivar');
+  writeln('- Monte Cristo');
+  writeln('- Warairarepano');
+    
+  writeln('- Zoologico');
+  writeln('- La Rinconada');
+    
+  writeln('- Las Flores');
+  writeln('- El Cristo');
+  writeln('- Roosevelt');
+  writeln('- Panteon');
+  writeln('- Roca Tarpeya');
+  writeln('- La Bandera');
+  writeln('- Socorro');
+  writeln('- Presidente Medina');
+  writeln('- Los Ilustres');
+  writeln('- La Hoyada');
+  writeln('- INCES');
+    
+  writeln('- Petare 2');
+  writeln('- 5 de Julio');
+  writeln('- Warairarepano');
+  writeln('- 19 de abril');
+  writeln('- 24 de julio');
+end.
+
+//Pedimos validar cedula para seguir con el proceso de compra
+begin
+    writeln('Para continuar con su proceso, indique su numero de cedula');
+    writeln('cedula');
+    readln(cedula);
+end;
+
+//Registrar la venta de los boletos
+
+begin
+    repeat
+        writeln('¡Gracias por preferirnos, bienvenido al Registro de Ventas!');
+        writeln('------------------------------------------');
+        writeln('Por favor, seleccione una de las siguientes opciones:');
+        writeln('1. Registrar venta');
+        writeln('2. Utilizar boleto');
+        writeln('3. Ver sistema');
+        writeln('4. Salir');
+        writeln('Opción: ');
+        readln(opcion);
+        
+    case opcion of
+      1: begin
+          writeln('Registrar venta');
+          writeln('-----------------');
+          writeln('Desea comprar un boleto?');
+          writeln('Si / no: ');
+          readln(opcion);
+      if opcion = 'Si' then
+      begin
+          writeln('Por favor, ingrese los datos pedidos a continuacion');
+          writeln('Nombre: ', 'Apellido: ', 'Cedula: ', 'Cantidad de boletos: ');
+          readln(Nombre, Apellido, Cedula, Cantidad);
+          
+           //Mostramos los tipos de boletos que están disponibles
+          
+          writeln('Seleccione el tipo de boleto que desea: ');
+          writeln('a. Simple: 1 viaje en metro');
+          writeln('b. Integrado: 1 viaje en metro, 1 viaje en metrobus');
+          writeln('c. Ida y vuelta: 2 viajes en metro');
+          writeln('d. Ida y vuelta integrado: 2 viajes en metro, 2 viajes en metrobus');
+          writeln('e. MultiAbono: 10 viajes en metro');
+          writeln('f. MultiAbono integrado: 10 viajes en metro, 10 viajes en metrobus');
+          writeln('g. Estudiantil simple: 10 viajes en metro');
+          writeln('h. Estudiantil integrado: 10 viajes en metro, 20 viajes en metrobus');
+          writeln('i. MetroTarjeta: 20 viajes, 30 viajes, 40 viajes');
+          writeln('j. MetroTarjeta integrada: 20 viajes(metro y metrobus), 30 viajes(metro y metrobus), 40 viajes(metro y metrobus)');
+          writeln('Opción: ');
+          readln(opcion);
+
+    case opcion of
+      1: begin
+          writeln('a. Simple: 1 viaje en metro');
+      end;
+      2: begin
+          writeln('b. Integrado: 1 viaje en metro, 1 viaje en metrobus');
+      end;
+      3: begin
+          writeln('c. Ida y vuelta: 2 viajes en metro');
+      end;
+      4: begin
+          writeln('d. Ida y vuelta integrado: 2 viajes en metro, 2 viajes en metrobus');
+      end;
+      5: begin
+          writeln('e. MultiAbono: 10 viajes en metro');
+      end;
+      6: begin
+          writeln('f. MultiAbono integrado: 10 viajes en metro, 10 viajes en metrobus');
+      end;
+      7: begin
+          writeln('g. Estudiantil simple: 10 viajes en metro');
+      end;
+      8: begin
+          writeln('h. Estudiantil integrado: 10 viajes en metro, 20 viajes en metrobus');
+      end;
+      9: begin
+          writeln('i. MetroTarjeta: 20 viajes, 30 viajes, 40 viajes');
+      end;
+      10: begin
+          writeln('j. MetroTarjeta integrada: 20 viajes(metro y metrobus), 30 viajes(metro y metrobus), 40 viajes(metro y metrobus)');
+      end;
+    end;
+          
+    //Calculamos el precio del boleto
+    
+    Precio = Precio[Ord(opcion) - Ord('a. Simple: 1 viaje en metro') + 1] * cantidad;
+        writeln('El precio total es: ', precio:0:2);
+    
+    begin
+        writeln('Seleccione la línea en la que desea viajar:');
+        writeln('1. Linea ' +Linea1);
+        writeln('2. Línea ' +Linea2);
+        writeln('3. Línea ' +Linea3);
+        writeln('4. Línea ' +Linea4);
+        writeln('5. Línea ' +Linea5);
+        writeln('6. Línea ' +Linea6);
+        writeln('7. Línea ' +Linea7);
+        writeln('8. Línea ' +Linea8);
+        writeln('Línea: ');
+        readln(boleto.Linea);
+    
+    MostrarEstaciones(boleto.Linea);
+    begin
+        writeln('estación de salida: ', 'estación de destino');
+        readln(EstacionSalida, EstacionDestino);
+    end;
+    
+        writeln('-- Resumen del proceso --');
+        writeln('Nombre: ', Nombre);
+        writeln('Cédula: ', Cedula);
+        writeln('Estación de salida: ', estacionSalida);
+        writeln('Estación de destino: ', estacionDestino);
+    
+        writeln('¿Su transaccion es la correcta?');
+        writeln('Si / no: ');
+        readln(opcion);
+    
+    if opcion = 'Si' then
+    begin
+        repeat
+            writeln('Por favor, ingrese su monto a cancelar: ');
+            readln(monto);
+        
+        if monto < precio then
+            writeln('Monto insuficiente. Faltan ', precio - monto:0:2)
+        else if monto > precio then
+        begin
+            writeln('Monto recibido: ', monto:0:2);
+            writeln('Vuelto: ', vuelto:0:2);
+            writeln('Gracias por su compra!');
+        end;
+        until monto >= precio;
+    end;
+    else
+        writeln('Compra cancelada. ¡Hasta luego!');
+    end;
+
+//se procede a utilizar el boleto
+begin
+    writeln('Utilizar boleto');
+    writeln('---------------');
+    writeln('Por favor, ingrese su número de cédula: ');
+    readln(cedula);
+    
+    encontrado := False;
+    cantidadBoletos := 0;
+    for i := 0 to High(boletos) do
+    begin
+    if boletos[i].Cedula = cedula then
+    begin
+        encontrado := True;
+        cantidadBoletos := cantidadBoletos + boletos[i].Cantidad;
+    end;
+  end;
+  
+  while encontrado do
+  begin
+      writeln('Boletos encontrados: ', cantidadBoletos);
+      writeln('¿Desea utilizarlos?');
+      writeln('Si / No): ');
+      readln(opcion);
+    
+    if opcion = 'Si' then
+    begin
+		for i:=1 to maxBoletos do
+		boletos[i] := true;
+    end;
+    
+    //Mostramos la disponibilidad de los boletos
+    
+    begin
+		for i:= 1 to maxBoletos do
+		if boletos[i] then
+			writeln('boleto ', 'i', ': Se encuentra disponible');
+		else
+			writeln('boleto ', 'i', ': No se encuentra disponible');
+		end;
+    end;
+    
+    //Comprar los boletos
+    
+    begin
+		writeln('Indique la cantidad de boletos que quiere comprar: ');
+		readln(cantidadBoletos);
+		
+		writeln('Ingrese el precio por boletos: ');
+		readln('precioBoletos');
+		
+		totalCompra:= cantidadBoletos*precioBoletos;
+		
+		writeln('El total de su compra es: ', totalCompra:0:2);
+		writeln('Gracias por su compra');
+		readln;
+    end;
+    else
+      writeln('Su operación fue cancelada. ¡Gracias por visitarnos!');
+    end;
+    
+    else
+    writeln('No se encontraron boletos asociados a la cédula proporcionada.');
+    end;
+
+//Procedemos a ver el Sistema
+begin
+    writeln('Ver sistema');
+    writeln('-----------');
+    writeln('Ingrese la contrasena: ');
+    readln(contrasena);
+end;
+    
+   //Verificamos si la contraseña es válida
+   
+	while not (contrasena >= 7) digitos do
+	begin
+		writeln('Su contrasena debe tener al menos 7 caracteres');
+		writeln('Ingrese una contrasena válida: ');
+		readln(contrasena);
+	end;
+	
+	while not (contrasena <> '') do
+	begin
+		writeln('No debe dejar espacios vacios'); 
+		writeln('Ingrese una contrasena válida');
+		readln(contrasena);
+	end;
+	
+	//Confirmamos la contraseña
+	
+	begin
+		writeln('por favor, confirme su contrasena');
+		readln(confirmacion);
+	end;
+	
+	while not (contrasena = confirmacion) do
+	begin
+		writeln('La contrasena no coincide con la confirmacion ingresada');
+		writeln('Introduzca nuevamente su contrasena');
+		readln(confirmacion);
+	end;
+	else 
+		writeln('Su contrasena ha sido validada satisfactoriamente');
+		readln;
+	end;
+begin
+    repeat
+        writeln('Gracias por preferinos, bienvenido al Registro de Ventas');
+        writeln('-----------------------------------------')
+        writeln('Por favor, seleccione una de las siguientes opciones:');
+        writeln('1. Registrar venta');
+        writeln('2. Utilizar boleto');
+        writeln('3. Ver sistema');
+        writeln('4. Salir');
+        writeln('Opción: ');
+        readln(opcion);
+    
+    case opcion of
+        1: begin
+            writeln('registrarVenta');
+           end;
+        2: begin
+            writeln('utilizarBoleto');
+           end;
+        3: begin
+            writeln('verSistema');
+        4: begin
+            writeln('¡Gracias por su visita, vuelva pronto');
+           end;
+        else writeln('Opción inválida. Por favor, seleccione una opción válida.');
+        end;
+    
+    writeln();
+  until opcion = 4;
+end.
+
+begin
+	writeln('Ingresar el total de las personas que han ingresado por línea');
+	readln(totalPersonas);
+	
+	writeln('Ingresar la cantidad de ventas de la estación');
+	readln(totalVentas);
+	
+	writeln('Ingresar la cantidad de boletos usado');
+	readln(totalBoletos);
+	
+	promedioVentas:=totalVentas/totalPersonas;
+	
+	writeln('El total de personas que han ingresado por línea es: ');
+	readln(totalPersonas);
+	
+	writeln('El promedio de ventas por persona es: ');
+	readln(promedioVentas:0:2);
+	
+	writeln('La cantidad de boletos usados es: ');
+	readln(totalBoletos);
+end.
